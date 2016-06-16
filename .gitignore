@@ -1,0 +1,16 @@
+config/local.php
+config/console-local.php
+/docker-compose.yml
+/vendor/
+.env
+/bower_components/
+/node_modules/
+/web/static/
+/web/partial/
+/.idea/
+/apidoc
+sd.sh
+composer.lock
+*.swp
+.vimrc
+.DS_Store
