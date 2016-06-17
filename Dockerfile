@@ -12,3 +12,14 @@ RUN apt-get update \
   && gem install compass \
   && rm -rf /npmjs.install.sh \
   && rm -rf /var/lib/apt/lists/*
+
+COPY . /var/www/html
+
+# install bower
+RUN npm install
+RUN bower install --allow-root --config.interactive=false
+RUN gulp dist
+
+# Expose everything under /var/www (vendor + html)
+# This is only required for the nginx setup
+VOLUME ["/var/www"]
