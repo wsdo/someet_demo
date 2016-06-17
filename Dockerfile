@@ -27,7 +27,7 @@ RUN npm install && bower install --allow-root
 
 COPY . /app/
 
-RUN gulp build 
+RUN gulp
 
 RUN cp -R /app/dist/*  /usr/share/nginx/html
 
