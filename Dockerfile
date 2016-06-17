@@ -29,6 +29,6 @@ COPY . /app/
 
 RUN gulp
 
-RUN cp -R /app/dist/*  /usr/share/nginx/html
+RUN cp -R /app/app/*  /usr/share/nginx/html
 
 CMD ["nginx", "-g", "daemon off;"]
