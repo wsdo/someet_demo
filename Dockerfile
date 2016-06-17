@@ -17,7 +17,7 @@ EXPOSE 80
 
 RUN npm install -g bower gulp
 
-WORKDIR /app
+WORKDIR /
 
 COPY ./package.json /app/
 COPY ./bower.json /app/
