@@ -2,17 +2,126 @@
 * @Author: wshudong
 * @Date:   2016-06-17 11:28:15
 * @Last Modified by:   wshudong
-* @Last Modified time: 2016-06-17 11:44:03
+* @Last Modified time: 2016-06-17 15:59:28
 */
 
-.box {
-    color: red;
-    border: 1px solid #eee;
-    width: 100px;
-    height: 100px;
-    background-color: yellow;
+
+html{
+		font-size: 20px;
+		text-decoration: none;
+	}
+		.activity-block {
+    position: relative;
+    -webkit-box-shadow: 0px 2px 2px #888;
+    -moz-box-shadow: 0px 2px 2px #888;
+    box-shadow: 0px 2px 2px #888;
+    /*background-color: #000;*/
+
+}
+.activity-block .mask {
+    position: absolute;
+    display: block
+    ;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    background: #000;
+    filter: alpha(opacity=10);
+    -moz-opacity: 0.1;
+    -khtml-opacity: 0.1;
+    opacity: 0.1;
 }
 
-.infinite-scroll-preloader {
-    margin-top: -20px;
+.activity-host img {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    border: 2px solid #FFF;
+}
+
+.activity-host label {
+    position: absolute;
+    font: normal 12px/18px Arial Black, Arial, Helvetica, sans-serif;
+    text-align: right;
+    text-shadow: #333 0 1px 0;
+    color: #fff;
+    top: 73px;
+    right: 16px;
+    width: 200px;
+    height: 44px;
+}
+
+.activity-host .divider {
+    position: absolute;
+    top: 67px;
+    right: 16px;
+    width: 44px;
+    height: 1px;
+    background: #eee;
+    overflow: hidden;
+}
+
+.activity-photo {
+    width: 100%;
+    display: inline-block;
+    /*    -webkit-box-shadow: 0px 5px 5px #888;
+    -moz-box-shadow: 0px 5px 5px #888;
+    box-shadow: 0px 5px 5px #888;*/
+}
+
+.activity-info {
+    position: relative;
+    height: 0;
+    top: -130px;
+    width: 100%;
+    /*left: 25px;*/
+    padding-left: 1rem;
+    font: bold 1em Arial Black, Arial, Helvetica, sans-serif;
+    color: #fff;
+    /*text-shadow: #333 0 1px 0;*/
+    float: left;
+}
+
+.activity-describe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: 60%;
+    height: 100%;
+    color: #fff;
+    line-height: 1.2rem;
+    font-size: 0.9rem;
+    text-align: center;
+    margin: auto;
+    display: table;
+}
+
+.activity-describe a {
+    vertical-align: middle;
+    display: table-cell;
+    color: #fff;
+}
+.detail-activity p {
+    line-height: 0.8rem;
+    font-size: 0.6rem;
+}
+
+.detail-activity img {
+    width: 100%;
+    /*padding-left: -1rem;*/
+    /*padding-right: -1rem;*/
+    display: inline-block;
+    background-size: contain;
+}
+.detail-title {
+    font: normal 1.1rem Helvetica, Arial Black, Arial, sans-serif;
+    text-align: center;
+    line-height: 1.15rem;
 }

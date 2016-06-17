@@ -86,14 +86,14 @@ gulp.task('open', function(done) {
 
 // 合并，压缩文件
 gulp.task('script', function() {
-    gulp.src('./src/static/js/*.js')
+    gulp.src('./src/static/js/*')
         .pipe(plumber())
-        .pipe(concat('all.js'))
-        .pipe(gulp.dest('./app/static/js'))
-        .pipe(rename('all.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('./app/static/js'))
-        .pipe(connect.reload());
+        // .pipe(concat('all.js'))
+        .pipe(gulp.dest('./app/static/js/'));
+        // .pipe(rename('all.min.js'))
+        // .pipe(uglify())
+        // .pipe(gulp.dest('./app/static/js'))
+        // .pipe(connect.reload());
 });
 
 gulp.task('template', function() {
@@ -114,13 +114,19 @@ gulp.task('css',function(){
 		.pipe(connect.reload());
 })
 
+gulp.task('copy-data', function() {
+  gulp.src('./src/static/data/*.json')
+    .pipe(plumber())
+    .pipe(gulp.dest('./app/static/data'));
+});
+
 // 默认任务
 gulp.task('default', function() {
     gulp.run('dist', 'watch');
 });
 
 gulp.task('watch', function() {
-    gulp.watch('./src/static/js/index.js', ['script']);
+    gulp.watch('./src/static/js/*', ['script']);
     gulp.watch('./src/static/css/*.css', ['css']);
     gulp.watch('./src/*.html', ['template']);
 });
@@ -129,16 +135,15 @@ gulp.task('dist', [
     'script',
     'copy-bundle',
     'template',
-    'css'
+    'copy-image',
+    'css',
+    'copy-data'
 ]);
 
 
 gulp.task('dev', [
     'connect',
     'dist',
-    'watch',
-    'open',
-    'css',
-    // 'browser-sync',
-    'copy-image'
+    'watch'
+    // 'open'
 ]);
