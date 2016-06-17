@@ -21,7 +21,7 @@ WORKDIR /app
 
 COPY ./package.json /app/
 COPY ./bower.json /app/
-COPY ./gulpfile /app/
+COPY ./gulpfile.js /app/
 RUN npm install && bower install --allow-root
 
 COPY . /app/
