@@ -11,7 +11,8 @@ var jshint = require('gulp-jshint'),
     changed = require('gulp-changed'),
     plumber = require('gulp-plumber'),
     gulpOpen = require('gulp-open'),
-    connect = require('gulp-connect');
+    connect = require('gulp-connect'),
+    minifyCSS =require('gulp-minify-css');
 
 var browserSync = require('browser-sync').create();
 var host = {
@@ -27,14 +28,15 @@ var pkg = require('./package.json');
 // 组件构建bundle
 gulp.task('copy-bundle', function() {
     gulp.src([
-            './src/css/sm.min.css',
+            './src/static/lib/sm.min.css',
         ])
         .pipe(plumber())
         .pipe(concat('bundle.css'))
         .pipe(gulp.dest('./app/static/css'));
 
     gulp.src([
-      './bower_components/zepto/zepto.min.js'
+      './bower_components/zepto/zepto.min.js',
+      './src/static/lib/sm.min.js',
         ])
         .pipe(plumber())
         .pipe(concat('bundle.js'))
@@ -57,14 +59,14 @@ gulp.task('copy-image', function() {
     .pipe(gulp.dest('./app/static/img'));
 });
 
-// gulp.task('open', function(done) {
-//     gulp.src('')
-//         .pipe(gulpOpen({
-//             app: browser,
-//             uri: 'http://localhost:3000'
-//         }))
-//         .on('end', done);
-// });
+gulp.task('open', function(done) {
+    gulp.src('')
+        .pipe(gulpOpen({
+            app: browser,
+            uri: 'http://localhost:3000'
+        }))
+        .on('end', done);
+});
 
 
 // gulp.task('browser-sync', function() {
@@ -91,22 +93,25 @@ gulp.task('script', function() {
         .pipe(rename('all.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('./app/static/js'))
+        .pipe(connect.reload());
 });
 
 gulp.task('template', function() {
     gulp.src('./src/*.html')
         .pipe(plumber())
-        .pipe(gulp.dest('./app'));
+        .pipe(gulp.dest('./app'))
+        .pipe(connect.reload());
 });
 
 gulp.task('css',function(){
-	gulp.src('./src/static/css')
+	gulp.src('./src/static/css/*.css')
 		.pipe(plumber())
 		.pipe(concat('all.css'))
 		.pipe(gulp.dest('./app/static/css'))
 		.pipe(rename('all.min.css'))
-		.pipe(uglify())
+		.pipe(minifyCSS())
 		.pipe(gulp.dest('./app/static/css'))
+		.pipe(connect.reload());
 })
 
 // 默认任务
@@ -115,7 +120,7 @@ gulp.task('default', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch('./src/static/js/*.js', ['script']);
+    gulp.watch('./src/static/js/index.js', ['script']);
     gulp.watch('./src/static/css/*.css', ['css']);
     gulp.watch('./src/*.html', ['template']);
 });
@@ -133,6 +138,7 @@ gulp.task('dev', [
     'dist',
     'watch',
     'open',
-    'browser-sync',
+    'css',
+    // 'browser-sync',
     'copy-image'
 ]);
