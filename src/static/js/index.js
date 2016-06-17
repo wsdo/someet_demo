@@ -16,9 +16,8 @@ Zepto(function($) {
         $.ajax({
             dataType: "json",
             type: 'GET',
-            url: "./static/data/activity"+page+".json",
+            url: "./static/data/activity" + page + ".json",
             success: function(data) {
-                console.log(data);
                 if (data.success == 1) {
                     var pages = data.data.pages;
                     // maxItems = Math.ceil(pages.totalCount / perPage);
@@ -36,10 +35,7 @@ Zepto(function($) {
                                 '<div class="activity-block" >' +
                                 '<img class="activity-photo" style="height:' + posterHeight + '" src="' + activity.poster + '" alt="activity photo"/>' +
                                 '<div class="activity-describe"><a href="/view.html?id=' + activity.id + ' " >' + activity.content + '</a></div></div></div>';
-
-                            // html  = '<img src="'+activity.poster+'"';
                         }
-                        // console.log(html);
                     }
 
                     $('.activity-list').append(html);
@@ -63,7 +59,7 @@ Zepto(function($) {
         })
     }
 
-getlist(page);
+    getlist(page);
 
 
     //预先加载20条
@@ -93,7 +89,7 @@ getlist(page);
                 $('.infinite-scroll-preloader').remove();
                 return;
             }
-              // 更新最后加载的序号
+            // 更新最后加载的序号
             page++;
             // 添加新条目
             getlist(page);

@@ -15,7 +15,6 @@ Zepto(function($) {
                 }
             }
         }
-        console.log(items);
         return items;
     };
 
