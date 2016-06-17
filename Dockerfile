@@ -1,24 +1,34 @@
 FROM node:0.12.7-wheezy
 
-ADD http://npmjs.org/install.sh /npmjs.install.sh
+MAINTAINER YeTing "me@yeting.info"
 
-RUN apt-get update \
-  # install nodejs ruby and some dev packages
-  && apt-get install -y --no-install-recommends  curl nodejs \
-  && ls /usr/bin/node || ln -s /usr/bin/nodejs /usr/bin/node \
-  # install bower gulp
-  && cat /npmjs.install.sh | sh \
-  && npm install -g bower gulp gulp-cli \
-  && rm -rf /npmjs.install.sh \
-  && rm -rf /var/lib/apt/lists/*
+RUN apt-key adv --keyserver pgp.mit.edu --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62
+RUN echo "deb http://nginx.org/packages/mainline/debian/ wheezy nginx" >> /etc/apt/sources.list
 
-COPY . /var/www/html
+ENV NGINX_VERSION 1.7.12-1~wheezy
 
-# install bower
-RUN npm install
-RUN bower install --allow-root --config.interactive=false
-RUN gulp 
+RUN apt-get update && \
+    apt-get install -y ca-certificates nginx && \
+    rm -rf /var/lib/apt/lists/*
 
-# Expose everything under /var/www (vendor + html)
-# This is only required for the nginx setup
-VOLUME ["/var/www"]
+# forward request and error logs to docker log collector
+RUN ln -sf /dev/stdout /var/log/nginx/access.log
+RUN ln -sf /dev/stderr /var/log/nginx/error.log
+
+EXPOSE 80
+
+RUN npm install -g bower gulp
+
+WORKDIR /app
+
+COPY ./package.json /app/
+COPY ./bower.json /app/
+RUN npm install && bower install --allow-root
+
+COPY . /app/
+
+RUN gulp build 
+
+RUN cp -R /app/dist/*  /usr/share/nginx/html
+
+CMD ["nginx", "-g", "daemon off;"]
