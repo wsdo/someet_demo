@@ -4,7 +4,7 @@ ADD http://npmjs.org/install.sh /npmjs.install.sh
 
 RUN apt-get update \
   # install nodejs ruby and some dev packages
-  && apt-get install -y --no-install-recommends libmcrypt-dev libpng12-dev libxslt-dev libtidy-dev bzip2 libbz2-dev libssl-dev curl nodejs ruby ruby-dev \
+  && apt-get install -y --no-install-recommends  curl nodejs \
   && ls /usr/bin/node || ln -s /usr/bin/nodejs /usr/bin/node \
   # install bower gulp
   && cat /npmjs.install.sh | sh \
@@ -17,7 +17,7 @@ COPY . /var/www/html
 # install bower
 RUN npm install
 RUN bower install --allow-root --config.interactive=false
-RUN gulp dist
+RUN gulp 
 
 # Expose everything under /var/www (vendor + html)
 # This is only required for the nginx setup

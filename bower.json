@@ -15,7 +15,6 @@
     "tests"
   ],
   "devDependencies": {
-    "sm.min": "https://github.com/sdc-alibaba/SUI-Mobile/blob/dev/dist/js/sm.min.js",
     "zepto": "^1.1.6"
   }
 }
