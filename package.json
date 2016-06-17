@@ -1,0 +1,44 @@
+{
+  "name": "someet_demo",
+  "version": "1.0.0",
+  "description": "``` 使用nodejs安装npm",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "bower": "^1.7.9"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.13.0",
+    "del": "^2.0.2",
+    "gulp": "^3.9.1",
+    "gulp-changed": "^1.3.0",
+    "gulp-clean": "0.3.1",
+    "gulp-concat": "2.6.0",
+    "gulp-connect": "2.2.0",
+    "gulp-css-base64": "^1.3.2",
+    "gulp-css-spriter": "^0.3.3",
+    "gulp-cssmin": "0.1.7",
+    "gulp-file-include": "0.13.7",
+    "gulp-jshint": "^1.11.2",
+    "gulp-less": "3.0.3",
+    "gulp-md5-plus": "0.1.8",
+    "gulp-open": "1.0.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.4.1",
+    "gulp-util": "~2.2.9",
+    "gulp-watch": "4.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wshudong/someet_demo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wshudong/someet_demo/issues"
+  },
+  "homepage": "https://github.com/wshudong/someet_demo#readme"
+}

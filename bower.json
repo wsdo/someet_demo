@@ -1,0 +1,21 @@
+{
+  "name": "someet_demo",
+  "homepage": "https://github.com/wshudong/someet_demo",
+  "authors": [
+    "wshudong <wsd312@163.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "sm.min": "https://github.com/sdc-alibaba/SUI-Mobile/blob/dev/dist/js/sm.min.js",
+    "zepto": "^1.1.6"
+  }
+}
