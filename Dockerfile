@@ -9,7 +9,6 @@ RUN apt-get update \
   # install bower gulp
   && cat /npmjs.install.sh | sh \
   && npm install -g bower gulp gulp-cli \
-  && gem install compass \
   && rm -rf /npmjs.install.sh \
   && rm -rf /var/lib/apt/lists/*
 
