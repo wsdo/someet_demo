@@ -25,67 +25,80 @@
             <!-- <script src="static/js/view.js"></script> -->
             <script>
             Zepto(function($) {
-                // 处理详情内容内容文字 判断p标签下面是否有img 如果没有则添加一个类来控制样式
-                var detailContentChildNodes = document.getElementsByClassName("detail-activity")[0].childNodes;
-                for (var i = 0; i < detailContentChildNodes.length; i++) {
-                    if (detailContentChildNodes[i].tagName == 'DIV') {
-                        continue;
-                    }
-                    var detailP = detailContentChildNodes[i].firstChild;
-                    if (detailP) {
-                        if (detailP.nodeName == 'IMG' || detailP.nodeName == 'DIV') {} else {
-                            $(detailContentChildNodes[i]).attr("class", "detail-activity-content")
-                        }
-
-                    }
-                }
-                var getParam = function(name) {
-                    var search = document.location.search;
-                    var pattern = new RegExp("[?&]" + name + "\=([^&]+)", "g");
-                    var matcher = pattern.exec(search);
-                    var items = null;
-                    if (null != matcher) {
-                        try {
-                            items = decodeURIComponent(decodeURIComponent(matcher[1]));
-                        } catch (e) {
-                            try {
-                                items = decodeURIComponent(matcher[1]);
-                            } catch (e) {
-                                items = matcher[1];
+                var oView = {
+                    page:1,
+                    fixViewStyle: function() {
+                        // 处理详情内容内容文字 判断p标签下面是否有img 如果没有则添加一个类来控制样式
+                        var detailContentChildNodes = document.getElementsByClassName("detail-activity")[0].childNodes;
+                        for (var i = 0; i < detailContentChildNodes.length; i++) {
+                            if (detailContentChildNodes[i].tagName == 'DIV') {
+                                continue;
                             }
-                        }
-                    }
-                    return items;
-                };
-
-                $.ajax({
-                    dataType: "json",
-                    type: 'GET',
-                    url: "./static/data/activity.json",
-                    success: function(data) {
-                        if (data.success == 1) {
-                            var pages = data.data.pages;
-                            // maxItems = Math.ceil(pages.totalCount / perPage);
-                            if (data.data.activities) {
-                                for (var i in data.data.activities) {
-                                    var activity = data.data.activities[i];
-                                    var id = getParam('id');
-                                    if (activity.id == id) {
-                                        var view = document.getElementById('view');
-                                        var poster = new Image;
-                                        poster.src = activity.poster;
-                                        poster.style.width = '100%';
-                                        view.appendChild(poster);
-                                        $(".detail-title").html(activity.title);
-                                        $(".detail-activity").html(activity.details);
-                                    }
-
+                            var detailP = detailContentChildNodes[i].firstChild;
+                            if (detailP) {
+                                if (detailP.nodeName == 'IMG' || detailP.nodeName == 'DIV') {} else {
+                                    $(detailContentChildNodes[i]).attr("class", "detail-activity-content")
                                 }
 
                             }
                         }
+                    },
+                    getParam: function(name) {
+                        var search = document.location.search;
+                        var pattern = new RegExp("[?&]" + name + "\=([^&]+)", "g");
+                        var matcher = pattern.exec(search);
+                        var items = null;
+                        // console.log(matcher);
+                        // if (null != matcher) {
+                        //     try {
+                        //         items = decodeURIComponent(decodeURIComponent(matcher[1]));
+                        //     } catch (e) {
+                        //         try {
+                        //             items = decodeURIComponent(matcher[1]);
+                        //         } catch (e) {
+                        //             items = matcher[1];
+                        //         }
+                        //     }
+                        // }
+                        // console.log(items);
+                        items = matcher[1];
+                        return items;
+                    },
+                    getView: function() {
+                        // var page = oView.getParam('page')
+                        this.fixViewStyle();
+                        // console.log(page);
+                        $.ajax({
+                            dataType: "json",
+                            type: 'GET',
+                            url: "./static/data/activity.json",
+                            success: function(data) {
+                                if (data.success == 1) {
+                                    var pages = data.data.pages;
+                                    // maxItems = Math.ceil(pages.totalCount / perPage);
+                                    if (data.data.activities) {
+                                        for (var i in data.data.activities) {
+                                            var activity = data.data.activities[i];
+                                            var id = oView.getParam('id');
+                                            if (activity.id == id) {
+                                                var view = document.getElementById('view');
+                                                var poster = new Image;
+                                                poster.src = activity.poster;
+                                                poster.style.width = '100%';
+                                                view.appendChild(poster);
+                                                $(".detail-title").html(activity.title);
+                                                $(".detail-activity").html(activity.details);
+                                            }
+
+                                        }
+
+                                    }
+                                }
+                            }
+                        })
                     }
-                })
+                }
+            oView.getView();
             })
             </script>
         </div>
