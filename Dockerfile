@@ -1,5 +1,7 @@
 FROM node:0.12.7-wheezy
 
+MAINTAINER YeTing "me@yeting.info"
+
 RUN apt-key adv --keyserver pgp.mit.edu --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62
 RUN echo "deb http://nginx.org/packages/mainline/debian/ wheezy nginx" >> /etc/apt/sources.list
 
@@ -25,6 +27,8 @@ RUN npm install && bower install --allow-root
 
 COPY . /app/
 
-RUN gulp build 
+RUN gulp dist
 
-CMD gulp env:replace && cp -r dist/* /usr/share/nginx/html/ && nginx -g 'daemon off;'
+RUN cp -R /app/app/*  /usr/share/nginx/html
+
+CMD ["nginx", "-g", "daemon off;"]

@@ -34,7 +34,7 @@ Zepto(function($) {
                             html += '<div class="activityList" href="/view?id=' + activity.id + '" activityId="' + activity.id + '" class="item-link item-content">' +
                                 '<div class="activity-block" >' +
                                 '<img class="activity-photo" style="height:' + posterHeight + '" src="' + activity.poster + '" alt="activity photo"/>' +
-                                '<div class="activity-describe"><a href="/view.html?id=' + activity.id + ' " >' + activity.content + '</a></div></div></div>';
+                                '<div class="activity-describe"><a href="/view.html?id=' + activity.id + '&page='+page+'" >' + activity.content + '</a></div></div></div>';
                         }
                     }
 
@@ -58,6 +58,7 @@ Zepto(function($) {
             }
         })
     }
+    $('#actList').hide();
 
     getlist(page);
 

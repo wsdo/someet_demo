@@ -1,0 +1,11 @@
+server {
+    listen 443 ssl;
+
+    ssl_certificate conf.d/server.crt;
+    ssl_certificate_key conf.d/server.key;
+    ssl_protocols  SSLv3 TLSv1;
+    ssl_ciphers  HIGH:!ADH:!EXPORT56:RC4+RSA:+MEDIUM;
+    ssl_prefer_server_ciphers on;
+
+    include application.conf.include;
+}
