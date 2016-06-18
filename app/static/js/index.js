@@ -58,6 +58,7 @@ Zepto(function($) {
             }
         })
     }
+    $('#actList').hide();
 
     getlist(page);
 
