@@ -46,7 +46,7 @@ Zepto(function($) {
                     //     $('.infinite-scroll-preloader').remove();
                     // }
                     setTimeout(function() {
-                        // $('.startAnimation').hide();
+                        $('.startAnimation').hide();
                         $('#actList').show();
                     }, 200);
                 }
