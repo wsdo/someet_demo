@@ -16,7 +16,7 @@ Zepto(function($) {
         $.ajax({
             dataType: "json",
             type: 'GET',
-            url: "./static/data/activity" + page + ".json",
+            url: "/someet_demo/static/data/activity" + page + ".json",
             success: function(data) {
                 if (data.success == 1) {
                     var pages = data.data.pages;
@@ -31,10 +31,10 @@ Zepto(function($) {
                                 continue;
                             };
                             ids += activity.id + ' ';
-                            html += '<div class="activityList" href="/view?id=' + activity.id + '" activityId="' + activity.id + '" class="item-link item-content">' +
+                            html += '<div class="activityList" href="/someet_demo/view?id=' + activity.id + '" activityId="' + activity.id + '" class="item-link item-content">' +
                                 '<div class="activity-block" >' +
                                 '<img class="activity-photo" style="height:' + posterHeight + '" src="' + activity.poster + '" alt="activity photo"/>' +
-                                '<div class="activity-describe"><a href="/view.html?id=' + activity.id + '&page='+page+'" >' + activity.content + '</a></div></div></div>';
+                                '<div class="activity-describe"><a href="/someet_demo/view.html?id=' + activity.id + '&page='+page+'" >' + activity.content + '</a></div></div></div>';
                         }
                     }
 
